@@ -14,7 +14,9 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $tasks = Task::all();
+        // memosティレクトリーの中のindexページを指定し、memosの連想配列を代入
+        return view('tasks.index', ['tasks' => $tasks]);
     }
 
     /**
@@ -24,7 +26,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        return view('tasks.index');
     }
 
     /**
@@ -35,7 +37,18 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // インスタンスの作成
+        $task = new Task;
+
+        // 値の用意
+        $task->title = $request->title;
+        $task->body = $request->body;
+
+        // インスタンスに値を設定して保存
+        $task->save();
+
+        // 登録したらindexに戻る
+        return redirect('/tsaks');
     }
 
     /**
@@ -47,7 +60,7 @@ class TaskController extends Controller
     public function show($id)
     {
         $task = Task::find($id);
-        return view('task.show', ['task' => $task]);
+        return view('tasks.show', ['task' => $task]);
     }
 
     /**
@@ -58,7 +71,8 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        //
+        $task = Task::find($id);
+        return view('tasks.edit', ['task' => $task]);
     }
 
     /**
@@ -70,7 +84,18 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // ここはidで探して持ってくる以外はstoreと同じ
+        $task = Task::find($id);
+
+        // 値の用意
+        $task->title = $request->title;
+        $task->body = $request->body;
+
+        // 保存
+        $task->save();
+
+        // 登録したらindexに戻る
+        return redirect('/tasks');
     }
 
     /**
@@ -81,6 +106,9 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $task = Task::find($id);
+        $task -> delete();
+
+        return redirect('/tasks');
     }
 }
