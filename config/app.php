@@ -67,8 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
-
+    'timezone' => 'Asia/Tokyo',
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
@@ -80,8 +79,8 @@ return [
     |
     */
 
-    'locale' => 'en',
-
+    'locale' => 'ja',
+    
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
